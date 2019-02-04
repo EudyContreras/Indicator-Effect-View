@@ -4,8 +4,10 @@
 [![platform](https://img.shields.io/badge/platform-Android-green.svg)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21s)
 [![License: ISC](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/ISC)
+[![](https://jitpack.io/v/EudyContreras/RippleEffect.svg)](https://jitpack.io/#EudyContreras/RippleEffect)
 ![Version](https://img.shields.io/github/release/EudyContreras/RippleEffect.svg?style=flat)
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
+
 
 #### This library allows you to display a ripple effect as an overlay to any view. The ripple effect is fully customizeable and supports a variety of options.
 
@@ -76,12 +78,23 @@ The ripple view can be added directly on the xml layout. The properties below wi
 
 ### Step 1
 
-* Add dependencies in build.gradle.
+* Add it in your root build.gradle at the end of repositories:
 
 ``` groovy
-    dependencies {
-       compile 'com.eudycontreras:rippleviewlib:1.0'
+    allprojects {
+    		repositories {
+    			maven { url 'http
+       s://jitpack.io' }
+    		}
     }
+```
+
+* Add as a dependency in you applications build.gradle.
+
+``` groovy
+   dependencies {
+   	  implementation 'com.github.EudyContreras:RippleEffect:Tag'
+   }
 ```
 
 ### Step 2

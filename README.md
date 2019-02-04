@@ -148,4 +148,4 @@ When using the RippleView through code it is importatnt to set a target at the r
 
 ## License:
 
-This project is licensed under the MIT License - see the [Licence](https://github.com/EudyContreras/RippleEffect/blob/master/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [Licence](https://github.com/EudyContreras/RippleEffect/blob/EudyContreras-readme/LICENSE) file for details

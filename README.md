@@ -4,6 +4,8 @@
 [![platform](https://img.shields.io/badge/platform-Android-green.svg)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21s)
 [![License: ISC](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/ISC)
+![Version](https://img.shields.io/github/release/EudyContreras/RippleEffect.svg?style=flat)
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 #### This library allows you to display a ripple effect as an overlay to any view. The ripple effect is fully customizeable and supports a variety of options.
 
@@ -11,13 +13,67 @@
 
 [RippleImage]: https://github.com/EudyContreras/RippleEffect/blob/EudyContreras-readme/Ripple.png
 
-## Usage
+
+## About:
+
+**APIs** offered by **Rippple EFfect**.
+
+The ripple effect has a high number of apis that give full control of how the ripple is shown to the user.
+
+#### In Code Code methods:
+|APIs | Description|
+|---|---|
+|**startRippleAnimation()**| No input|
+|**startRippleAnimation(int startDelay)**| The delay before the ripple starts|
+|**stopRippleAnimation(int duration)**| Stop the ripple animation|
+|**stopRippleAnimation()**| Stop the ripple animation|
+|**setUpWith(ViewGroup parent)**| Sets a parent root to the ripple view|
+|**setTarget(Context context, View view)**|Sets the target view|
+|**setTarget(View view, float radiusRatio)**|Sets the target view and the relative size ratio|
+|**setTarget(int centerX, int centerY)**|Uses coordinates to position the ripple|
+|**setOnEnd(Runnable onEnd)**|Executes the wrapped code upon ending the ripple animation|
+|**setOnStart(Runnable onStart)**|Executes the wrapped code upon starting the ripple animation|
+|**setRippleDuration(int rippleDuration)**|Sets the duration of the ripple animation|
+|**setDrawListener(ViewDrawListener listener)**|Sets a listener for when the view is first drawn|
+|**setRippleType(int rippleType)**|Sets the type of ripple. Ex: RippleView.RIPPLE_TYPE_INDICATOR|
+|**setRippleColor(int rippleColor)**|Sets the color of the ripple effect|
+|**setRippleRepeats(int rippleRepeats)**|Sets how many times the ripple will repeat|
+|**setRippleRepeatMode(int rippleRepeatMode)**|Sets the repeat mode. Ex: RippleView.REPEAT_RESTART_MODE|
+|**setRippleCount(int rippleCount)**|Sets the amount of ripple to display|
+|**setRippleMinOpacity(float rippleMinOpacity)**|Sets the min opacity a ripple can have|
+|**setRippleMaxOpacity(float rippleMaxOpacity)**|Sets the max opacity a ripple can have|
+|**setRippleStrokeWidth(float rippleStrokeWidth)**|Sets the width in pixels of the stroke used for outline style|
+
+#### XML properties:
+ * **rv_rippleType:**  The type of ripple to be shown, The ripple can be outlined or filled.
+ * **rv_rippleRepeatMode:**  The repeat mode of how the animation should be repeated.
+ * **rv_rippleShapeType:**  The ripple can be circular or rectangular.
+ * **rv_autoStartAnimation:**  Determines whether the ripple animation should start automatically.
+ * **rv_rippleDuration:**  Determines the amount of time that the ripple animation should last.
+ * **rv_rippleColo:r** Determines the color the ripple should have.
+ * **rv_rippleCount:**  Determines the amount of ripples to animate.
+ * **rv_rippleStrokeWidth:**  Determine the width of the strokes that are shown if outline is chosen
+ * **rv_rippleClipRadius:**  Determines how big the clipped area radius will be for the Indicator ripple
+ * **rv_rippleClipWidth:**  Determines how big the clipped area width will be for the Indicator ripple
+ * **rv_rippleClipHeight:** Determines how big the clipped area height will be for the Indicator ripple
+ * **rv_rippleMaxOpacity:**  Determines the max amount of opacity a ripple can have
+ * **rv_rippleMinOpacity:** Determines the lowest amount of opacity a ripple can have
+ * **rv_rippleMaxRadius:** Determines the hightest radius a ripple can have
+ * **rv_rippleMinRadius:** Determines the lowest radius a ripple can have
+ * **rv_rippleMinWidth:** Determines the lowest width a rectangular ripple can have
+ * **rv_rippleMaxWidth:** Determines the highest width a rectangular ripple can have
+ * **rv_rippleMinHeight:** Determines the lowest height a rectangular ripple can have
+ * **rv_rippleMaxHeight:** Determines the highest height a rectangular ripple can have
+ * **rv_rippleRepeatCount:** Determines the amount of times a ripple will 
+ * **rv_rippleCornerRadiu:s**
+ 
+## How to use it?
 
 ### Step 1
 
-Add dependencies in build.gradle.
+* Add dependencies in build.gradle.
 
-```groovy
+``` groovy
     dependencies {
        compile 'com.wang.avi:library:2.1.3'
     }
@@ -25,7 +81,7 @@ Add dependencies in build.gradle.
 
 ### Step 2
 
-Add the Ripple View to your layout:
+* Add the Ripple View to your layout:
 
 ``` xml
     <com.eudycontreras.rippleview
@@ -40,7 +96,7 @@ Add the Ripple View to your layout:
         />
 ```
 
-Or add the ripple directly through code:
+* Or add the ripple directly through code:
 
 ``` java
         RippleView ripple = new RippleView(this);
@@ -59,20 +115,33 @@ Or add the ripple directly through code:
 When using the RippleView through code it is importatnt to set a target at the right place. The target must be set once the view's dimensions and location have been computed.
 
 ``` java
-    public void onResume() {
+
+    private float radiusRatio = 1.7;
+    private float clipRatio = 0.5;
+        
+    void onPause(){
+        super.onPause();
+        ripple.stopRippleAnimation()
+    }
+    
+    void onResume() {
         super.onResume()
         
         View view = findViewById(R.id.someElement);
-        float radiusRatio = 1.7;
-        float clipRatio = 0.5;
        
         view.post {
-            ctaView.setTarget(this, view, radiusRatio, clipRatio)
-            //ctaView.stopRippleAnimation()
-            ctaView.startRippleAnimation()
+            ripple.setTarget(this, view, radiusRatio, clipRatio)
+            ripple.startRippleAnimation()
         }
     }
 ```  
+
+## How to customize it? 
+
+## Authors:
+
+Eudy Contreras
+
 ## License:
 
 This project is licensed under the MIT License - see the [Licence](https://github.com/EudyContreras/RippleEffect/blob/master/LICENSE.md) file for details

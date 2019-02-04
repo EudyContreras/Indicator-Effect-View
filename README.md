@@ -16,9 +16,9 @@
 
 ## About:
 
-**APIs** offered by **Rippple EFfect**.
+In code **APIs** offered by **Rippple View**.
 
-The ripple effect has a high number of apis that give full control of how the ripple is shown to the user.
+The ripple effect has a high number of apis that give full control of how the ripple is shown to the user. 
 
 #### In Code Code methods:
 |APIs | Description|
@@ -44,7 +44,12 @@ The ripple effect has a high number of apis that give full control of how the ri
 |**setRippleMaxOpacity(float rippleMaxOpacity)**|Sets the max opacity a ripple can have|
 |**setRippleStrokeWidth(float rippleStrokeWidth)**|Sets the width in pixels of the stroke used for outline style|
 
-#### XML properties:
+Xml Layout **APIs** offered by the **Rippple View**.
+
+The ripple view can be added directly on the xml layout. The properties below will allow you to modify the ripple to your taste.
+
+#### In XML RippleView properties:
+
  * **rv_rippleType:**  The type of ripple to be shown, The ripple can be outlined or filled.
  * **rv_rippleRepeatMode:**  The repeat mode of how the animation should be repeated.
  * **rv_rippleShapeType:**  The ripple can be circular or rectangular.
@@ -65,7 +70,7 @@ The ripple effect has a high number of apis that give full control of how the ri
  * **rv_rippleMinHeight:** Determines the lowest height a rectangular ripple can have
  * **rv_rippleMaxHeight:** Determines the highest height a rectangular ripple can have
  * **rv_rippleRepeatCount:** Determines the amount of times a ripple will 
- * **rv_rippleCornerRadiu:s**
+ * **rv_rippleCornerRadiu:s** Determines how rounded the corners of a rectangular ripple is 
  
 ## How to use it?
 
@@ -75,7 +80,7 @@ The ripple effect has a high number of apis that give full control of how the ri
 
 ``` groovy
     dependencies {
-       compile 'com.wang.avi:library:2.1.3'
+       compile 'com.eudycontreras:rippleviewlib:1.0'
     }
 ```
 
@@ -99,17 +104,18 @@ The ripple effect has a high number of apis that give full control of how the ri
 * Or add the ripple directly through code:
 
 ``` java
-        RippleView ripple = new RippleView(this);
-        ripple.setRippleType(RippleView.RIPPLE_TYPE_INDICATOR);
-        ripple.setRippleClipRadius(DimensionUtility.convertDpToPixel(this,50));
-        ripple.setRippleColor(ContextCompat.getColor(this,R.color.accent));
-        ripple.setRippleCount(3);
-        ripple.setRippleMinOpacity(0.1f);
-        ripple.setRippleMaxOpacity(0.8f);
-        ripple.setRippleRepeatMode(RippleView.REPEAT_RESTART_MODE);
-        ripple.setRippleRepeats(RippleView.INFINITE_REPEATS);
-        ripple.setRippleDuration(2500);
-        ripple.setUpWith(findViewById(R.id.login_activity));
+    RippleView ripple = new RippleView(this);
+    
+    ripple.setRippleType(RippleView.RIPPLE_TYPE_INDICATOR);
+    ripple.setRippleClipRadius(DimensionUtility.convertDpToPixel(this,50));
+    ripple.setRippleColor(ContextCompat.getColor(this,R.color.accent));
+    ripple.setRippleCount(3);
+    ripple.setRippleMinOpacity(0.1f);
+    ripple.setRippleMaxOpacity(0.8f);
+    ripple.setRippleRepeatMode(RippleView.REPEAT_RESTART_MODE);
+    ripple.setRippleRepeats(RippleView.INFINITE_REPEATS);
+    ripple.setRippleDuration(2500);
+    ripple.setUpWith(findViewById(R.id.login_activity));
 ```
 
 When using the RippleView through code it is importatnt to set a target at the right place. The target must be set once the view's dimensions and location have been computed.
@@ -136,11 +142,9 @@ When using the RippleView through code it is importatnt to set a target at the r
     }
 ```  
 
-## How to customize it? 
-
 ## Authors:
 
-Eudy Contreras
+**Eudy Contreras**
 
 ## License:
 

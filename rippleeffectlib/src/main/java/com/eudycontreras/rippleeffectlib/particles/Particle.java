@@ -42,7 +42,11 @@ public abstract class Particle {
 
     protected Bounds bounds;
     protected Paint paint;
+
     protected ColorUtility.SoulColor color;
+    protected ColorUtility.SoulColor colorStart;
+    protected ColorUtility.SoulColor colorEnd;
+    protected ColorUtility.SoulColor strokeColor;
 
     protected Particle(float lifeTime, float x, float y, float velX, float velY, float varianceX, float varianceY, float radius, int color, Paint paint, Bounds bounds) {
         this.centerX = x;
@@ -239,6 +243,30 @@ public abstract class Particle {
 
     public void setColor(ColorUtility.SoulColor color) {
         this.color = color;
+    }
+
+    public void setStrokeColor(ColorUtility.SoulColor color) {
+        this.strokeColor = color;
+    }
+
+    public ColorUtility.SoulColor getStrokeColor() {
+        return strokeColor;
+    }
+
+    public ColorUtility.SoulColor getColorStart() {
+        return colorStart;
+    }
+
+    public void setColorStart(ColorUtility.SoulColor colorStart) {
+        this.colorStart = colorStart;
+    }
+
+    public ColorUtility.SoulColor getColorEnd() {
+        return colorEnd;
+    }
+
+    public void setColorEnd(ColorUtility.SoulColor colorEnd) {
+        this.colorEnd = colorEnd;
     }
 
     public float getDecay() {

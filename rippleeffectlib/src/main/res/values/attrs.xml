@@ -14,8 +14,14 @@
             <enum name="rectangle" value="1"/>
         </attr>
         <attr name="rv_autoStartAnimation" format="boolean"/>
+        <attr name="rv_useColorInterpolation" format="boolean"/>
+        <attr name="rv_showBorderStroke" format="boolean"/>
+        <attr name="rv_intervalDelay" format="reference|integer"/>
         <attr name="rv_rippleDuration" format="reference|integer"/>
         <attr name="rv_rippleColor" format="reference|color"/>
+        <attr name="rv_rippleStrokeColor" format="reference|color"/>
+        <attr name="rv_rippleColorStart" format="reference|color"/>
+        <attr name="rv_rippleColorEnd" format="reference|color"/>
         <attr name="rv_rippleCount" format="reference|integer"/>
         <attr name="rv_rippleStrokeWidth" format="reference|dimension"/>
         <attr name="rv_rippleClipRadius" format="reference|dimension"/>

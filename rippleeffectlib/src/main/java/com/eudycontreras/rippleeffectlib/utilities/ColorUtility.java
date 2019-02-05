@@ -54,6 +54,14 @@ public class ColorUtility {
        color.setAlpha(Math.round(color.getAlpha() * factor));
     }
 
+    public static void interpolateColor(SoulColor start, SoulColor end, float amount, SoulColor result) {
+        result.setColor(start);
+
+        result.setRed((int)(start.red + ((end.red - start.red) * amount)));
+        result.setGreen((int)(start.green + ((end.green - start.green) * amount)));
+        result.setBlue((int)(start.blue + ((end.blue - start.blue) * amount)));
+    }
+
     public static SoulColor toSoulColor(int color){
         int alpha = Color.alpha(color);
         int red = Color.red(color);
@@ -63,6 +71,8 @@ public class ColorUtility {
     }
 
     public static class SoulColor{
+
+        private int tempColor;
 
         private int red;
         private int green;
@@ -89,6 +99,13 @@ public class ColorUtility {
 
         public SoulColor(){
             this(0x000000);
+        }
+
+        public void setColor(SoulColor color){
+            this.alpha = color.alpha;
+            this.red = color.red;
+            this.green = color.green;
+            this.blue = color.blue;
         }
 
         public void setColor(int color){
@@ -135,7 +152,21 @@ public class ColorUtility {
         }
 
         public int toColor(){
-            return Color.argb(alpha,red,green,blue);
+            if(tempColor == -1){
+                tempColor = Color.argb(alpha,red,green,blue);
+                return tempColor;
+            }else{
+                if(colorChanged()){
+                    tempColor = Color.argb(alpha,red,green,blue);
+                    return tempColor;
+                }
+            }
+
+            return tempColor;
+        }
+
+        private boolean colorChanged(){
+            return true;
         }
 
         public static SoulColor copy(SoulColor color){

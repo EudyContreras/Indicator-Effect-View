@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Region;
 import com.eudycontreras.rippleeffectlib.Bounds;
+import com.eudycontreras.rippleeffectlib.utilities.ColorUtility;
 import com.eudycontreras.rippleeffectlib.views.RippleView;
 
 /**
@@ -42,6 +43,8 @@ public class ParticleRipple extends Particle {
     private float clipHeight;
 
     private float strokeWidth;
+
+    private float interpolation;
 
     private int shapeType;
     private int type;
@@ -92,10 +95,16 @@ public class ParticleRipple extends Particle {
         }
         opacity = minOpacity + ((maxOpacity - minOpacity) * (maxOpacity - minOpacity - time));
 
+        interpolation = 1f + ((1f - 0f) * (1f + 0f - time));
+
         if(opacity < 0f)
             opacity = 0f;
         if(opacity > 1f)
             opacity = 1f;
+
+        if(colorStart != null && colorEnd != null) {
+            ColorUtility.interpolateColor(colorStart, colorEnd, time, color);
+        }
     }
 
     @Override
@@ -120,8 +129,16 @@ public class ParticleRipple extends Particle {
 
     private void drawFilledRipple(Canvas canvas) {
         color.setAlpha(opacity);
+
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color.toColor());
+
+        if(strokeColor != null){
+            strokeColor.setAlpha(opacity);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(strokeWidth);
+            paint.setColor(strokeColor.toColor());
+        }
 
         if(shapeType == RippleView.RIPPLE_CIRCLE){
             canvas.drawCircle(centerX, centerY, radius, paint);
@@ -136,6 +153,7 @@ public class ParticleRipple extends Particle {
 
     private void drawOutLineRipple(Canvas canvas) {
         color.setAlpha(opacity);
+
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(strokeWidth);
         paint.setColor(color.toColor());
@@ -155,11 +173,19 @@ public class ParticleRipple extends Particle {
         canvas.clipPath(clipPath, Region.Op.DIFFERENCE);
 
         color.setAlpha(opacity);
+
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color.toColor());
-        canvas.drawCircle(centerX, centerY, radius, paint);
+
+        if(strokeColor != null){
+            strokeColor.setAlpha(opacity);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(strokeWidth);
+            paint.setColor(strokeColor.toColor());
+        }
 
         if(shapeType == RippleView.RIPPLE_CIRCLE) {
+            canvas.drawCircle(centerX, centerY, radius, paint);
             canvas.clipPath(clipPath, Region.Op.DIFFERENCE);
         }else{
             float top = y;

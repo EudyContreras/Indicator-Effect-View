@@ -95,7 +95,7 @@ The ripple view can be added directly on the xml layout. The properties below wi
 | **rv_rippleMinHeight:** |Determines the lowest height a rectangular ripple can have|
 | **rv_rippleMaxHeight:** |Determines the highest height a rectangular ripple can have|
 | **rv_rippleRepeatCount:** |Determines the amount of times a ripple will |
-| **rv_rippleCornerRadiu:s** |Determines how rounded the corners of a rectangular ripple is |
+| **rv_rippleCornerRadius:** |Determines how rounded the corners of a rectangular ripple is |
  
  
 ## How to use it?

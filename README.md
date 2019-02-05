@@ -16,7 +16,7 @@
 [RippleImage]: https://github.com/EudyContreras/RippleEffect/blob/EudyContreras-readme/Ripple.png
 
 
-### About:
+## About:
 
 This ripple effect view allows for a high variety of customizations in order to fit the needs of all users. It is simple to use and easy to customize. Here are some of the features of the ripple effect view.
 
@@ -29,15 +29,16 @@ This ripple effect view allows for a high variety of customizations in order to 
 * Make the ripple animation repeat as many times as you want.
 * Add an action to be perform upon starting a ripple effect animation
 * Add an action to be perform upon the end of a ripple effect animation
-* Etc..
+* Add an interpolator to the ripple animation
+* Etc...
 
-### APIs and customization:
+## APIs and customization:
 
 In code **APIs** offered by **Rippple View**.
 
 The ripple effect has a high number of apis that give full control of how the ripple is shown to the user. 
 
-#### In Code Code methods:
+### In Code Code methods:
 |APIs | Description|
 |---|---|
 |**startRippleAnimation()**| No input|
@@ -67,7 +68,7 @@ The ripple effect has a high number of apis that give full control of how the ri
 
 The ripple view can be added directly on the xml layout. The properties below will allow you to modify the ripple to your taste.
 
-#### In XML RippleView properties:
+### In XML RippleView properties:
 
 |Property | Description|
 |---|---|
@@ -94,7 +95,7 @@ The ripple view can be added directly on the xml layout. The properties below wi
 | **rv_rippleCornerRadiu:s** |Determines how rounded the corners of a rectangular ripple is |
  
  
-### How to use it?
+## How to use it?
 
 #### Step 1
 
@@ -180,14 +181,23 @@ When using the RippleView through code it is importatnt to set a target at the r
     }
 ```  
 
-### Authors:
+## Authors:
 
 **Eudy Contreras**
 
-### Contact:
+## Contact:
 
 If you wish to contact you may reach me through my [Linked](https://www.linkedin.com/in/eudycontreras/) or my [Email](EudyContrerasRosario@gmail.com)
 
-### License:
+## Future works:
+
+There are parts of this library that are yet to be finished and there are also some things which I plan to add to the library. These things will be shown here along with popular demands.
+
+- [ ] Port the code kotlin
+- [ ] Add to different repositories besides jitpack
+- [ ] Allow the user to set a repeat interval/wait time
+- [ ] Allow the user to set a repeat interval/wait time
+
+## License:
 
 This project is licensed under the MIT License - see the [Licence](https://github.com/EudyContreras/RippleEffect/blob/EudyContreras-readme/LICENSE) file for details

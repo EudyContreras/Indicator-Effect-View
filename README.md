@@ -77,7 +77,10 @@ The ripple view can be added directly on the xml layout. The properties below wi
 | **rv_rippleShapeType:**  |The ripple can be circular or rectangular.|
 | **rv_autoStartAnimation:**  |Determines whether the ripple animation should start automatically.|
 | **rv_rippleDuration:**  |Determines the amount of time that the ripple animation should last.|
-| **rv_rippleColo:r** |Determines the color the ripple should have.|
+| **rv_rippleColor:** |Determines the color the ripple should have.|
+| **rv_rippleStrokeColor:** |Determines the border color of the ripple if using ripple border.|
+| **rv_rippleColorStart:** |Determines the start color the ripple should have if interpolation enabled.|
+| **rv_rippleColorEnd:** |Determines the ending color the ripple should have if interpolation enabled.|
 | **rv_rippleCount:**  |Determines the amount of ripples to animate.|
 | **rv_rippleStrokeWidth:**  |Determine the width of the strokes that are shown if outline is chosen|
 | **rv_rippleClipRadius:**  |Determines how big the clipped area radius will be for the Indicator ripple|
@@ -152,7 +155,6 @@ Or add the ripple directly through code:
     ripple.setRippleDuration(2500);
     ripple.setUpWith(findViewById(R.id.login_activity));
 ```
-
 
 
 When using the RippleView through code it is importatnt to set a target at the right place. The target must be set once the view's dimensions and location have been computed.

@@ -106,9 +106,13 @@ Add it in your root build.gradle at the end of repositories:
 
 ``` groovy
 
+    dependencies {
+       classpath 'com.github.dcendents:android-maven-gradle-plugin:${version}'
+    }
+    
     allprojects {
-    		repositories {
-    			maven { url 'https://jitpack.io' }
+    		 repositories {
+    			  maven { url 'https://jitpack.io' }
     		}
     }
 ```
@@ -118,7 +122,7 @@ Add as a dependency in you applications build.gradle.
 ``` groovy
 
    dependencies {
-   	  implementation "com.github.EudyContreras:RippleEffect:v1.0"
+   	  implementation "com.github.EudyContreras:Ripple-Effect-View:v1.0"
    }
 ```
 

@@ -9,7 +9,15 @@ import com.eudycontreras.rippleeffectlib.utilities.ColorUtility;
 import com.eudycontreras.rippleeffectlib.views.RippleView;
 
 /**
- * Created by eudycontreras.
+ * <b>Note:</b> Unlicensed private property of the author and creator
+ * unauthorized use of this class outside of the Ripple Effect project
+ * by the author may result on legal prosecution.
+ * <p>
+ * Created by <B>Eudy Contreras</B>
+ *
+ * @author  Eudy Contreras
+ * @version 1.0
+ * @since   2018-03-31
  */
 public class ParticleRipple extends Particle {
 
@@ -39,8 +47,8 @@ public class ParticleRipple extends Particle {
 
     private float clipRadius;
 
-    private float clipWidth;
-    private float clipHeight;
+    private float clipWidhtRatio;
+    private float clipHeightRatio;
 
     private float strokeWidth;
 
@@ -93,9 +101,8 @@ public class ParticleRipple extends Particle {
             x = x - (width/2);
             y = y - (height/2);
         }
-        opacity = minOpacity + ((maxOpacity - minOpacity) * (maxOpacity - minOpacity - time));
 
-        interpolation = 1f + ((1f - 0f) * (1f + 0f - time));
+        opacity = minOpacity + ((maxOpacity - minOpacity) * (maxOpacity - minOpacity - time));
 
         if(opacity < 0f)
             opacity = 0f;
@@ -109,11 +116,10 @@ public class ParticleRipple extends Particle {
 
     @Override
     public boolean isAlive() {
-        return opacity >= 0f;
+        return opacity > 0f && (radius > 0 || width > 0 || height > 0);
     }
 
     public void draw(Canvas canvas){
-
         switch (type){
             case RIPPLE_TYPE_FILLED:
                 drawFilledRipple(canvas);
@@ -133,15 +139,19 @@ public class ParticleRipple extends Particle {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color.toColor());
 
-        if(strokeColor != null){
-            strokeColor.setAlpha(opacity);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(strokeWidth);
-            paint.setColor(strokeColor.toColor());
-        }
-
         if(shapeType == RippleView.RIPPLE_CIRCLE){
             canvas.drawCircle(centerX, centerY, radius, paint);
+
+            if(strokeColor != null){
+                strokeColor.setAlpha(opacity);
+
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(strokeWidth);
+                paint.setColor(strokeColor.toColor());
+
+                canvas.drawCircle(centerX, centerY, radius, paint);
+            }
+
         }else{
             float top = y;
             float left = x;
@@ -177,15 +187,19 @@ public class ParticleRipple extends Particle {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color.toColor());
 
-        if(strokeColor != null){
-            strokeColor.setAlpha(opacity);
-            paint.setStyle(Paint.Style.STROKE);
-            paint.setStrokeWidth(strokeWidth);
-            paint.setColor(strokeColor.toColor());
-        }
-
         if(shapeType == RippleView.RIPPLE_CIRCLE) {
             canvas.drawCircle(centerX, centerY, radius, paint);
+
+            if(strokeColor != null){
+                strokeColor.setAlpha(opacity);
+
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(strokeWidth);
+                paint.setColor(strokeColor.toColor());
+
+                canvas.drawCircle(centerX, centerY, radius, paint);
+            }
+
             canvas.clipPath(clipPath, Region.Op.DIFFERENCE);
         }else{
             float top = y;

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,6 +26,17 @@ import com.eudycontreras.rippleeffectlib.utilities.DimensionUtility;
 
 import java.util.ArrayList;
 
+/**
+ * <b>Note:</b> Unlicensed private property of the author and creator
+ * unauthorized use of this class outside of the Ripple Effect project
+ * by the author may result on legal prosecution.
+ * <p>
+ * Created by <B>Eudy Contreras</B>
+ *
+ * @author  Eudy Contreras
+ * @version 1.0
+ * @since   2018-03-31
+ */
 public class RippleView extends View {
 
     public static final int RIPPLE_CIRCLE = 0;
@@ -79,6 +91,9 @@ public class RippleView extends View {
     private float rippleCornerRadius;
 
     private float rippleStrokeWidth;
+
+    private long revealDuration = 300;
+    private long concealDuration = 300;
 
     private boolean useColorInterpolation;
     private boolean showBorderStroke;
@@ -157,14 +172,12 @@ public class RippleView extends View {
 
     private void initialize() {
         paint = new Paint();
-        color =  new ColorUtility.SoulColor();
-        colorStart =  new ColorUtility.SoulColor();
-        colorEnd =  new ColorUtility.SoulColor();
-        strokeColor = new ColorUtility.SoulColor();
         paint.setAntiAlias(true);
+
+        color =  new ColorUtility.SoulColor();
+
         animatorSet = new AnimatorSet();
         animators = new ArrayList<>();
-
     }
 
     public void setUpAttributes(TypedArray typedArray) {
@@ -205,8 +218,10 @@ public class RippleView extends View {
 
     private void initializeRipple() {
         setAlpha(0);
+
         rippleDelay = rippleDuration/rippleCount;
         ripples = new ParticleRipple[rippleCount];
+
         for(Animator animator : animators) {
             animator.cancel();
             animator.end();
@@ -226,43 +241,45 @@ public class RippleView extends View {
         }
 
         if(showBorderStroke) {
+            strokeColor = new ColorUtility.SoulColor();
             strokeColor.setColor(rippleStrokeColor);
         }else{
             strokeColor = null;
         }
 
         for(int i = 0; i< ripples.length; i++){
-            ParticleRipple particle = new ParticleRipple();
-            particle.setPaint(new Paint());
-            particle.setShapeType(rippleShape);
-            particle.setCornerRadius(rippleCornerRadius);
-            particle.setMinRadius(rippleMinRadius);
-            particle.setMaxRadius(rippleMaxRadius);
-            particle.setMinOpacity(rippleMinOpacity);
-            particle.setMaxOpacity(rippleMaxOpacity);
-            particle.setClipRadius(rippleClipRadius);
-            particle.setStrokeWidth(rippleStrokeWidth);
-            particle.setMinWidth(rippleMinWidth);
-            particle.setMinHeight(rippleMinHeight);
-            particle.setMaxWidth(rippleMaxWidth);
-            particle.setMaxHeight(rippleMaxHeight);
-            particle.setColor(color);
-            particle.setStrokeColor(strokeColor);
-            particle.setColorStart(colorStart);
-            particle.setColorEnd(colorEnd);
-            particle.setType(rippleType);
-            particle.setCenterX(centerX);
-            particle.setCenterY(centerY);
-            particle.setVisible(true);
-            particle.init();
+            ParticleRipple ripple = new ParticleRipple();
+            ripple.setPaint(new Paint());
+            ripple.setShapeType(rippleShape);
+            ripple.setCornerRadius(rippleCornerRadius);
+            ripple.setMinRadius(rippleMinRadius);
+            ripple.setMaxRadius(rippleMaxRadius);
+            ripple.setMinOpacity(rippleMinOpacity);
+            ripple.setMaxOpacity(rippleMaxOpacity);
+            ripple.setClipRadius(rippleClipRadius);
+            ripple.setStrokeWidth(rippleStrokeWidth);
+            ripple.setMinWidth(rippleMinWidth);
+            ripple.setMinHeight(rippleMinHeight);
+            ripple.setMaxWidth(rippleMaxWidth);
+            ripple.setMaxHeight(rippleMaxHeight);
+            ripple.setColor(color);
+            ripple.setStrokeColor(strokeColor);
+            ripple.setColorStart(colorStart);
+            ripple.setColorEnd(colorEnd);
+            ripple.setType(rippleType);
+            ripple.setCenterX(centerX);
+            ripple.setCenterY(centerY);
+            ripple.setVisible(true);
+            ripple.init();
 
-            ripples[i] = particle;
+            ripples[i] = ripple;
 
             final int index = i;
             final ValueAnimator animator = ValueAnimator.ofFloat(0f,1f);
+
             animator.setRepeatCount(rippleRepeats);
             animator.setRepeatMode(rippleRepeatMode);
-            animator.setStartDelay((long)(i * rippleDelay));
+            animator.setStartDelay((long)(index * rippleDelay));
             animator.setDuration(rippleDuration);
             animator.addUpdateListener(animation -> {
                 if(ripples[index] == null)
@@ -315,13 +332,16 @@ public class RippleView extends View {
     }
 
     public void startRippleAnimation(int rippleDelay) {
+        startRippleAnimation(rippleDelay, new AccelerateDecelerateInterpolator());
+    }
+
+    public void startRippleAnimation(int rippleDelay, Interpolator interpolator) {
         new Handler().postDelayed(()-> {
             animatorSet.end();
             animatorSet.cancel();
             if(!animationRunning){
-
                 animatorSet = new AnimatorSet();
-                animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+                animatorSet.setInterpolator(interpolator);
                 animatorSet.playTogether(animators);
                 animatorSet.start();
                 animationRunning=true;
@@ -330,27 +350,12 @@ public class RippleView extends View {
     }
 
     public void stopRippleAnimation() {
-        stopRippleAnimation(200);
+        stopRippleAnimation(concealDuration);
     }
 
-    public void stopRippleAnimation(int duration) {
+    public void stopRippleAnimation(long duration) {
         if(animationRunning){
-            ValueAnimator showAnimator = ValueAnimator.ofFloat(1f, 0f);
-            showAnimator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    animatorSet.end();
-                    animatorSet.cancel();
-                    animationRunning=false;
-                }
-            });
-            showAnimator.addUpdateListener(animation -> {
-                this.setAlpha((float) animation.getAnimatedValue());
-            });
-            showAnimator.setDuration(duration);
-            showAnimator.setInterpolator(new LinearInterpolator());
-            showAnimator.start();
+          dismiss(duration);
         }
     }
 
@@ -358,7 +363,7 @@ public class RippleView extends View {
         @Override
         public void onAnimationStart(Animator animation) {
             super.onAnimationStart(animation);
-            show();
+            show(revealDuration);
         }
     };
 
@@ -367,16 +372,16 @@ public class RippleView extends View {
         @Override
         public void onAnimationEnd(Animator animation) {
             super.onAnimationEnd(animation);
-            dismiss();
+            dismiss(concealDuration);
         }
     };
 
-    private void show(){
+    private void show(long duration){
         ValueAnimator showAnimator = ValueAnimator.ofFloat(0f, 1f);
         showAnimator.addUpdateListener(animation ->
             this.setAlpha((float) animation.getAnimatedValue())
         );
-        showAnimator.setDuration(300);
+        showAnimator.setDuration(duration);
         showAnimator.setInterpolator(new DecelerateInterpolator());
         showAnimator.start();
 
@@ -385,11 +390,26 @@ public class RippleView extends View {
         }
     }
 
-    private void dismiss(){
-        animationRunning=false;
-        if(onEnd != null){
-            onEnd.run();
-        }
+    private void dismiss(long duration){
+        ValueAnimator showAnimator = ValueAnimator.ofFloat(1f, 0f);
+        showAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                animatorSet.end();
+                animatorSet.cancel();
+                animationRunning=false;
+                if(onEnd != null){
+                    onEnd.run();
+                }
+            }
+        });
+        showAnimator.addUpdateListener(animation -> {
+            this.setAlpha((float) animation.getAnimatedValue());
+        });
+        showAnimator.setDuration(duration);
+        showAnimator.setInterpolator(new LinearInterpolator());
+        showAnimator.start();
     }
 
     public void removeRipple(){
@@ -438,6 +458,9 @@ public class RippleView extends View {
             initializeValues();
 
             for (ParticleRipple ripple : ripples) {
+                if(ripple == null)
+                    return;
+
                 ripple.setBounds(bounds);
                 ripple.setColor(color);
                 ripple.setStrokeColor(strokeColor);
@@ -469,6 +492,8 @@ public class RippleView extends View {
             if(autoStartRipple) {
                 startRippleAnimation();
             }
+
+            invalidate();
         }
 
         for (ParticleRipple ripple : ripples) {
@@ -501,8 +526,10 @@ public class RippleView extends View {
         target = view;
 
         stopRippleAnimation();
+
         parent.removeView(this);
         parent.addView(this);
+
         setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
 
         int[] location = new int[2];
@@ -524,8 +551,8 @@ public class RippleView extends View {
         rippleMinRadius = rippleClipRadius;
         rippleMaxRadius = rippleMinRadius * radiusRatio;
 
-        setElevation(view.getElevation());
-        setTranslationZ(view.getTranslationZ());
+        setElevation(view.getElevation()-1f);
+        setTranslationZ(view.getTranslationZ()-1f);
     }
 
     public void setOnEnd(Runnable onEnd) {

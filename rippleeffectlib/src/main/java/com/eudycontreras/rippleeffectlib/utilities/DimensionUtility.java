@@ -5,12 +5,9 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 /**
- * <h1>Class description!</h1>
-
- * <p>
  * <b>Note:</b> Unlicensed private property of the author and creator
- * unauthorized use of this class outside of the Soul Vibe project
- * may result on legal prosecution.
+ * unauthorized use of this class outside of the Ripple Effect project
+ * by the author may result on legal prosecution.
  * <p>
  * Created by <B>Eudy Contreras</B>
  *

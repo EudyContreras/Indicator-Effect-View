@@ -28,13 +28,16 @@ class MainActivity : AppCompatActivity() {
         ripple = RippleView(this, findViewById<ViewGroup>(R.id.root))
         ripple.rippleType = RippleView.RIPPLE_TYPE_INDICATOR
         ripple.rippleColor = ContextCompat.getColor(this, R.color.colorAccent)
-        ripple.rippleCount = 1
+        ripple.rippleStrokeColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+        ripple.rippleColorStart = ContextCompat.getColor(this, R.color.colorPrimary)
+        ripple.rippleColorEnd = ContextCompat.getColor(this, R.color.colorAccent)
+        ripple.rippleCount = 5
         ripple.rippleMinOpacity = 0f
         ripple.rippleMaxOpacity = 1f
         ripple.rippleRepeatMode = RippleView.REPEAT_RESTART_MODE
-        ripple.rippleRepeats = 20
+        ripple.rippleRepeats = RippleView.INFINITE_REPEATS
         ripple.rippleDuration = 2000
-        ripple.rippleStrokeWidth = 20f
+        ripple.rippleStrokeWidth = 10f
     }
 
     override fun onResume() {
@@ -52,27 +55,21 @@ class MainActivity : AppCompatActivity() {
             Handler().postDelayed({
                 someElementContainer.animate()
                     .setInterpolator(interpolatorOut)
-                    .translationZ(DimensionUtility.convertDpToPixel(this,12f))
+                    .translationZ(DimensionUtility.convertDpToPixel(this,DimensionUtility.convertPixelsToDp(this,8f)))
                     .scaleY(1f)
                     .scaleX(1f)
                     .setDuration(150L)
                     .setListener(object:  Animator.AnimatorListener {
-                        override fun onAnimationRepeat(p0: Animator?) {
-
-                        }
+                        override fun onAnimationRepeat(p0: Animator?) { }
 
                         override fun onAnimationEnd(p0: Animator?) {
-                            ripple.setTarget(someElementContainer, 2.65f, 0.47f)
-                            ripple.startRippleAnimation()
+                            ripple.setTarget(someElementContainer, 2.45f, 0.43f)
+                            ripple.startRippleAnimation(1000)
                         }
 
-                        override fun onAnimationCancel(p0: Animator?) {
+                        override fun onAnimationCancel(p0: Animator?) {}
 
-                        }
-
-                        override fun onAnimationStart(p0: Animator?) {
-
-                        }
+                        override fun onAnimationStart(p0: Animator?) {}
                     })
                     .start()
             },1000)
@@ -100,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                     someElementContainer.animate()
                         .setInterpolator(interpolatorOut)
                         .setListener(null)
-                        .translationZ(DimensionUtility.convertDpToPixel(this,12f))
+                        .translationZ(DimensionUtility.convertDpToPixel(this,8f))
                         .scaleY(1f)
                         .scaleX(1f)
                         .setDuration(150L)
@@ -110,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                     someElementContainer.animate()
                         .setInterpolator(interpolatorOut)
                         .setListener(null)
-                        .translationZ(DimensionUtility.convertDpToPixel(this,12f))
+                        .translationZ(DimensionUtility.convertDpToPixel(this,8f))
                         .scaleY(1f)
                         .scaleX(1f)
                         .setDuration(150L)
@@ -119,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                 MotionEvent.ACTION_CANCEL -> {
                     someElementContainer.animate()
                         .setInterpolator(interpolatorOut)
-                        .translationZ(DimensionUtility.convertDpToPixel(this,12f))
+                        .translationZ(DimensionUtility.convertDpToPixel(this,8f))
                         .scaleY(1f)
                         .scaleX(1f)
                         .setDuration(150L)

@@ -18,11 +18,27 @@
 
 ## About:
 
+This ripple effect view allows for a high variety of customizations in order to fit the needs of all users. It is simple to use and easy to customize. Here are some of the features of the ripple effect view.
+
+* Create an effect with an unlimited amount of ripples given a specified time
+* Create a ripple effect with a border 
+* Control the minimum and maximum opacity of the ripple from start to end
+* Interpolate the ripple between a start and end color
+* Choose between a circular or rectangular ripple with possibility of rounded corners.
+* Choose between indicator ripples, filled ripples, or outline ripples.
+* Make the ripple animation repeat as many times as you want.
+* Add an action to be perform upon starting a ripple effect animation
+* Add an action to be perform upon the end of a ripple effect animation
+* Add an interpolator to the ripple animation
+* Etc...
+
+## APIs and customization:
+
 In code **APIs** offered by **Rippple View**.
 
 The ripple effect has a high number of apis that give full control of how the ripple is shown to the user. 
 
-#### In Code Code methods:
+### In Code Code methods:
 |APIs | Description|
 |---|---|
 |**startRippleAnimation()**| No input|
@@ -46,60 +62,73 @@ The ripple effect has a high number of apis that give full control of how the ri
 |**setRippleMaxOpacity(float rippleMaxOpacity)**|Sets the max opacity a ripple can have|
 |**setRippleStrokeWidth(float rippleStrokeWidth)**|Sets the width in pixels of the stroke used for outline style|
 
-Xml Layout **APIs** offered by the **Rippple View**.
+
+
+**XML** Layout **APIs** offered by the **Rippple View**.
 
 The ripple view can be added directly on the xml layout. The properties below will allow you to modify the ripple to your taste.
 
-#### In XML RippleView properties:
+### In XML RippleView properties:
 
- * **rv_rippleType:**  The type of ripple to be shown, The ripple can be outlined or filled.
- * **rv_rippleRepeatMode:**  The repeat mode of how the animation should be repeated.
- * **rv_rippleShapeType:**  The ripple can be circular or rectangular.
- * **rv_autoStartAnimation:**  Determines whether the ripple animation should start automatically.
- * **rv_rippleDuration:**  Determines the amount of time that the ripple animation should last.
- * **rv_rippleColo:r** Determines the color the ripple should have.
- * **rv_rippleCount:**  Determines the amount of ripples to animate.
- * **rv_rippleStrokeWidth:**  Determine the width of the strokes that are shown if outline is chosen
- * **rv_rippleClipRadius:**  Determines how big the clipped area radius will be for the Indicator ripple
- * **rv_rippleClipWidth:**  Determines how big the clipped area width will be for the Indicator ripple
- * **rv_rippleClipHeight:** Determines how big the clipped area height will be for the Indicator ripple
- * **rv_rippleMaxOpacity:**  Determines the max amount of opacity a ripple can have
- * **rv_rippleMinOpacity:** Determines the lowest amount of opacity a ripple can have
- * **rv_rippleMaxRadius:** Determines the hightest radius a ripple can have
- * **rv_rippleMinRadius:** Determines the lowest radius a ripple can have
- * **rv_rippleMinWidth:** Determines the lowest width a rectangular ripple can have
- * **rv_rippleMaxWidth:** Determines the highest width a rectangular ripple can have
- * **rv_rippleMinHeight:** Determines the lowest height a rectangular ripple can have
- * **rv_rippleMaxHeight:** Determines the highest height a rectangular ripple can have
- * **rv_rippleRepeatCount:** Determines the amount of times a ripple will 
- * **rv_rippleCornerRadiu:s** Determines how rounded the corners of a rectangular ripple is 
+|Property | Description|
+|---|---|
+| **rv_rippleType:**  |The type of ripple to be shown, The ripple can be outlined or filled.|
+| **rv_rippleRepeatMode:**  |The repeat mode of how the animation should be repeated.|
+| **rv_rippleShapeType:**  |The ripple can be circular or rectangular.|
+| **rv_autoStartAnimation:**  |Determines whether the ripple animation should start automatically.|
+| **rv_rippleDuration:**  |Determines the amount of time that the ripple animation should last.|
+| **rv_rippleColor:** |Determines the color the ripple should have.|
+| **rv_rippleStrokeColor:** |Determines the border color of the ripple if using ripple border.|
+| **rv_rippleColorStart:** |Determines the start color the ripple should have if interpolation enabled.|
+| **rv_rippleColorEnd:** |Determines the ending color the ripple should have if interpolation enabled.|
+| **rv_rippleCount:**  |Determines the amount of ripples to animate.|
+| **rv_rippleStrokeWidth:**  |Determine the width of the strokes that are shown if outline is chosen|
+| **rv_rippleClipRadius:**  |Determines how big the clipped area radius will be for the Indicator ripple|
+| **rv_rippleClipWidth:**  |Determines how big the clipped area width will be for the Indicator ripple
+| **rv_rippleClipHeight:** |Determines how big the clipped area height will be for the Indicator ripple|
+| **rv_rippleMaxOpacity:**  |Determines the max amount of opacity a ripple can have|
+| **rv_rippleMinOpacity:** |Determines the lowest amount of opacity a ripple can have|
+| **rv_rippleMaxRadius:** |Determines the hightest radius a ripple can have|
+| **rv_rippleMinRadius:** |Determines the lowest radius a ripple can have|
+| **rv_rippleMinWidth:** |Determines the lowest width a rectangular ripple can have|
+| **rv_rippleMaxWidth:** |Determines the highest width a rectangular ripple can have|
+| **rv_rippleMinHeight:** |Determines the lowest height a rectangular ripple can have|
+| **rv_rippleMaxHeight:** |Determines the highest height a rectangular ripple can have|
+| **rv_rippleRepeatCount:** |Determines the amount of times a ripple will |
+| **rv_rippleCornerRadius:** |Determines how rounded the corners of a rectangular ripple is |
+ 
  
 ## How to use it?
 
-### Step 1
+#### Step 1
 
-* Add it in your root build.gradle at the end of repositories:
+Add it in your root build.gradle at the end of repositories:
 
 ``` groovy
+
+    dependencies {
+       classpath 'com.github.dcendents:android-maven-gradle-plugin:${version}'
+    }
+    
     allprojects {
-    		repositories {
-    			maven { url 'http
-       s://jitpack.io' }
+    		 repositories {
+    			  maven { url 'https://jitpack.io' }
     		}
     }
 ```
 
-* Add as a dependency in you applications build.gradle.
+Add as a dependency in you applications build.gradle.
 
 ``` groovy
+
    dependencies {
-   	  implementation 'com.github.EudyContreras:RippleEffect:Tag'
+   	  implementation "com.github.EudyContreras:Ripple-Effect-View:v1.0"
    }
 ```
 
-### Step 2
+#### Step 2
 
-* Add the Ripple View to your layout:
+Add the Ripple View to your layout:
 
 ``` xml
     <com.eudycontreras.rippleview
@@ -114,7 +143,7 @@ The ripple view can be added directly on the xml layout. The properties below wi
         />
 ```
 
-* Or add the ripple directly through code:
+Or add the ripple directly through code:
 
 ``` java
     RippleView ripple = new RippleView(this);
@@ -131,7 +160,10 @@ The ripple view can be added directly on the xml layout. The properties below wi
     ripple.setUpWith(findViewById(R.id.login_activity));
 ```
 
+
 When using the RippleView through code it is importatnt to set a target at the right place. The target must be set once the view's dimensions and location have been computed.
+
+
 
 ``` java
 
@@ -158,6 +190,19 @@ When using the RippleView through code it is importatnt to set a target at the r
 ## Authors:
 
 **Eudy Contreras**
+
+## Contact:
+
+If you wish to contact you may reach me through my [Linked](https://www.linkedin.com/in/eudycontreras/) or my [Email](EudyContrerasRosario@gmail.com)
+
+## Future works:
+
+There are parts of this library that are yet to be finished and there are also some things which I plan to add to the library. These things will be shown here along with popular demands.
+
+- [ ] Port the code kotlin
+- [ ] Add to different repositories besides jitpack
+- [ ] Allow the user to set a repeat interval/wait time
+- [ ] Allow the user to set a repeat interval/wait time
 
 ## License:
 

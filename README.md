@@ -202,7 +202,6 @@ There are parts of this library that are yet to be finished and there are also s
 - [ ] Port the code kotlin
 - [ ] Add to different repositories besides jitpack
 - [ ] Allow the user to set a repeat interval/wait time
-- [ ] Allow the user to set a repeat interval/wait time
 
 ## License:
 

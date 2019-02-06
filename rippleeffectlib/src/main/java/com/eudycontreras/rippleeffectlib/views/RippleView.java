@@ -12,13 +12,18 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.eudycontreras.rippleeffectlib.Bounds;
+import com.eudycontreras.rippleeffectlib.Property;
 import com.eudycontreras.rippleeffectlib.R;
 import com.eudycontreras.rippleeffectlib.particles.ParticleRipple;
 import com.eudycontreras.rippleeffectlib.utilities.ColorUtility;
@@ -75,6 +80,9 @@ public class RippleView extends View {
     private float centerX = Integer.MIN_VALUE;
     private float centerY = Integer.MIN_VALUE;
 
+    private float offsetX = 0f;
+    private float offsetY = 0f;
+
     private float rippleMinWidth;
     private float rippleMinHeight;
 
@@ -95,11 +103,11 @@ public class RippleView extends View {
     private long revealDuration = 300;
     private long concealDuration = 300;
 
-    private boolean useColorInterpolation;
-    private boolean showBorderStroke;
-    private boolean animationRunning;
-    private boolean autoStartRipple;
-    private boolean cleanUpAfter;
+    private boolean useColorInterpolation = false;
+    private boolean showBorderStroke = false;
+    private boolean animationRunning = false;
+    private boolean autoStartRipple = false;
+    private boolean cleanUpAfter = false;
 
     private ParticleRipple[] ripples;
     private ArrayList<Animator> animators;
@@ -109,6 +117,7 @@ public class RippleView extends View {
     private Runnable runLater;
     private ViewDrawListener listener;
 
+    private Handler handler;
     private AnimatorSet animatorSet;
     private ViewGroup parent;
     private Bounds bounds;
@@ -175,6 +184,8 @@ public class RippleView extends View {
         paint.setAntiAlias(true);
 
         color =  new ColorUtility.SoulColor();
+
+        handler = new Handler();
 
         animatorSet = new AnimatorSet();
         animators = new ArrayList<>();
@@ -267,9 +278,12 @@ public class RippleView extends View {
             ripple.setColorStart(colorStart);
             ripple.setColorEnd(colorEnd);
             ripple.setType(rippleType);
-            ripple.setCenterX(centerX);
-            ripple.setCenterY(centerY);
+            ripple.setX(rippleX + offsetX);
+            ripple.setY(rippleY + offsetY);
+            ripple.setCenterX(centerX + offsetX);
+            ripple.setCenterY(centerY + offsetY);
             ripple.setVisible(true);
+            ripple.setAlwaysAlive(true);
             ripple.init();
 
             ripples[i] = ripple;
@@ -297,10 +311,10 @@ public class RippleView extends View {
                 ripples[index].setMaxRadius(rippleMaxRadius);
                 ripples[index].setClipRadius(rippleClipRadius);
                 ripples[index].setStrokeWidth(rippleStrokeWidth);
-                ripples[index].setCenterX(centerX);
-                ripples[index].setCenterY(centerY);
-                ripples[index].setX(rippleX);
-                ripples[index].setY(rippleY);
+                ripples[index].setCenterX(centerX + offsetX);
+                ripples[index].setCenterY(centerY + offsetY);
+                ripples[index].setX(rippleX + offsetX);
+                ripples[index].setY(rippleY + offsetY);
                 ripples[index].setMinWidth(rippleMinWidth);
                 ripples[index].setMinHeight(rippleMinHeight);
                 ripples[index].setMaxWidth(rippleMaxWidth);
@@ -336,16 +350,15 @@ public class RippleView extends View {
     }
 
     public void startRippleAnimation(int rippleDelay, Interpolator interpolator) {
-        new Handler().postDelayed(()-> {
+        handler.postDelayed(()-> {
             animatorSet.end();
             animatorSet.cancel();
-            if(!animationRunning){
-                animatorSet = new AnimatorSet();
-                animatorSet.setInterpolator(interpolator);
-                animatorSet.playTogether(animators);
-                animatorSet.start();
-                animationRunning=true;
-            }
+            animatorSet = new AnimatorSet();
+            animatorSet.setInterpolator(interpolator);
+            animatorSet.playTogether(animators);
+            animatorSet.start();
+            animationRunning=true;
+
         }, rippleDelay);
     }
 
@@ -473,10 +486,10 @@ public class RippleView extends View {
                 ripple.setMaxRadius(rippleMaxRadius);
                 ripple.setClipRadius(rippleClipRadius);
                 ripple.setStrokeWidth(rippleStrokeWidth);
-                ripple.setCenterX(centerX);
-                ripple.setCenterY(centerY);
-                ripple.setX(rippleX);
-                ripple.setY(rippleY);
+                ripple.setX(rippleX + offsetX);
+                ripple.setY(rippleY + offsetY);
+                ripple.setCenterX(centerX + offsetX);
+                ripple.setCenterY(centerY + offsetY);
                 ripple.setMaxWidth(rippleMaxWidth);
                 ripple.setMaxHeight(rippleMaxHeight);
                 ripple.setMinWidth(rippleMinWidth);
@@ -530,16 +543,32 @@ public class RippleView extends View {
         parent.removeView(this);
         parent.addView(this);
 
-        setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
+        if(getLayoutParams() instanceof ConstraintLayout.LayoutParams){
+            setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
+        }else if (getLayoutParams() instanceof LinearLayout.LayoutParams){
+            setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        }else if (getLayoutParams() instanceof FrameLayout.LayoutParams){
+            setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        }else if (getLayoutParams() instanceof RelativeLayout.LayoutParams){
+            setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+        }else{
+            setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
 
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
+        int[] locationView = new int[2];
+        int[] locationParent = new int[2];
 
-        centerX = (location[0] + view.getWidth()  / 2f);
-        centerY = (location[1] + view.getHeight() / 2f) - DimensionUtility.convertDpToPixel(getContext(), 24) ;
+        view.getLocationOnScreen(locationView);
+        parent.getLocationOnScreen(locationParent);
 
-        rippleX = (location[0] + view.getWidth()  / 2f);
-        rippleY = (location[1] + view.getHeight() / 2f) - DimensionUtility.convertDpToPixel(getContext(), 24) ;
+        locationView[0] = locationView[0] - getCalculatedOffsetX(parent);
+        locationView[1] = locationView[1] - getCalculatedOffsetY(parent);
+
+        centerX = (locationView[0] + view.getWidth()  / 2f);
+        centerY = (locationView[1] + view.getHeight() / 2f) - DimensionUtility.convertDpToPixel(getContext(), 24) ;
+
+        rippleX = (locationView[0] + view.getWidth()  / 2f);
+        rippleY = (locationView[1] + view.getHeight() / 2f) - DimensionUtility.convertDpToPixel(getContext(), 24) ;
 
         rippleMinWidth = view.getWidth();
         rippleMinHeight = view.getHeight();
@@ -553,6 +582,58 @@ public class RippleView extends View {
 
         setElevation(view.getElevation()-1f);
         setTranslationZ(view.getTranslationZ()-1f);
+    }
+
+    private int getCalculatedOffsetY(ViewGroup parent) {
+        Property<Integer> property = new Property<>(parent.getTop());
+
+        //getCalculatedOffsetY(parent.getParent(), property);
+
+        return property.getValue();
+    }
+
+    private int getCalculatedOffsetX(ViewGroup parent) {
+        Property<Integer> property = new Property<>(parent.getLeft());
+
+        //getCalculatedOffsetX(parent.getParent(), property);
+
+        return property.getValue();
+    }
+
+    private void getCalculatedOffsetY(ViewParent parent, Property<Integer> offset) {
+        if(parent instanceof ViewGroup){
+            ViewGroup group = (ViewGroup) parent;
+            offset.setValue(offset.getValue()+group.getTop());
+            if(group.getParent() != null){
+                getCalculatedOffsetY(group.getParent(), offset);
+            }
+        }
+    }
+
+    private void getCalculatedOffsetX(ViewParent parent, Property<Integer> offset) {
+        if(parent instanceof ViewGroup){
+            ViewGroup group = (ViewGroup) parent;
+            offset.setValue(offset.getValue()+group.getLeft());
+            if(group.getParent() != null){
+                getCalculatedOffsetX(group.getParent(), offset);
+            }
+        }
+    }
+
+    public void setOffsetX(float offsetX){
+        this.offsetX = offsetX;
+    }
+
+    public void setOffsetY(float offsetY){
+        this.offsetY = offsetY;
+    }
+
+    public float getOffsetX() {
+        return offsetX;
+    }
+
+    public float getOffsetY() {
+        return offsetY;
     }
 
     public void setOnEnd(Runnable onEnd) {

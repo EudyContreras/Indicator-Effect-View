@@ -116,7 +116,7 @@ public class ParticleRipple extends Particle {
 
     @Override
     public boolean isAlive() {
-        return opacity > 0f && (radius > 0 || width > 0 || height > 0);
+        return (opacity > 0f && (radius > 0 || width > 0 || height > 0)) || alwaysAlive;
     }
 
     public void draw(Canvas canvas){

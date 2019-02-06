@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         ripple.rippleRepeats = RippleView.INFINITE_REPEATS
         ripple.rippleDuration = 2000
         ripple.rippleStrokeWidth = 10f
+        ripple.offsetY = DimensionUtility.convertPixelsToDp(this,10f)
     }
 
     override fun onResume() {
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             Handler().postDelayed({
                 someElementContainer.animate()
                     .setInterpolator(interpolatorOut)
-                    .translationZ(DimensionUtility.convertDpToPixel(this,DimensionUtility.convertPixelsToDp(this,8f)))
+                    .translationZ(DimensionUtility.convertDpToPixel(this, DimensionUtility.convertPixelsToDp(this,8f)))
                     .scaleY(1f)
                     .scaleX(1f)
                     .setDuration(150L)
@@ -63,8 +64,10 @@ class MainActivity : AppCompatActivity() {
                         override fun onAnimationRepeat(p0: Animator?) { }
 
                         override fun onAnimationEnd(p0: Animator?) {
-                            ripple.setTarget(someElementContainer, 2.45f, 0.43f)
-                            ripple.startRippleAnimation(1000)
+                            if(!ripple.isAnimationRunning){
+                                ripple.setTarget(someElementContainer, 2.45f, 0.43f)
+                                ripple.startRippleAnimation(1000)
+                            }
                         }
 
                         override fun onAnimationCancel(p0: Animator?) {}
@@ -116,6 +119,7 @@ class MainActivity : AppCompatActivity() {
                 MotionEvent.ACTION_CANCEL -> {
                     someElementContainer.animate()
                         .setInterpolator(interpolatorOut)
+                        .setListener(null)
                         .translationZ(DimensionUtility.convertDpToPixel(this,8f))
                         .scaleY(1f)
                         .scaleX(1f)

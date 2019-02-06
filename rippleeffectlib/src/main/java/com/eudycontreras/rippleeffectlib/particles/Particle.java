@@ -47,6 +47,7 @@ public abstract class Particle {
     protected boolean fade = true;
     protected boolean shrink = true;
     protected boolean checkBounds = false;
+    protected boolean alwaysAlive = false;
 
     protected Bounds bounds;
     protected Paint paint;
@@ -130,10 +131,14 @@ public abstract class Particle {
     }
 
     public boolean isAlive() {
-        if(bounds != null) {
-            return (!checkBounds || bounds.inRange(centerX, centerY, (radius * 2))) && (lifeSpan > 0) && (radius > 0) && (opacity > 0);
-        }
-        return lifeSpan > 0;
+       if(alwaysAlive){
+           return true;
+       }else{
+           if(bounds != null) {
+               return (!checkBounds || bounds.inRange(centerX, centerY, (radius * 2))) && (lifeSpan > 0) && (radius > 0) && (opacity > 0);
+           }
+           return lifeSpan > 0;
+       }
     }
 
     public Paint getPaint() {
@@ -311,6 +316,14 @@ public abstract class Particle {
 
     public void setCheckBounds(boolean checkBounds) {
         this.checkBounds = checkBounds;
+    }
+
+    public boolean isAlwaysAlive() {
+        return alwaysAlive;
+    }
+
+    public void setAlwaysAlive(boolean alwaysAlive) {
+        this.alwaysAlive = alwaysAlive;
     }
 
     public void setSpacing(float spacing) {

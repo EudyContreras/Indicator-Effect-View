@@ -42,25 +42,21 @@ The indicator effect has a high number of apis that give full control of how the
 |APIs | Description|
 |---|---|
 |**startIndicatorAnimation**| *No input* |
-|**startIndicatornimation(int startDelay)**| *The delay before the indicator starts* |
-|**stopIndicatorAnimation(int duration)**| *Stop the indicator animation* |
-|**stopIndicatorAnimation()**| *Stop the ripple animation* |
-|**setUpWith(ViewGroup parent)**| *Sets a parent root to the indicator view* |
-|**setTarget(Context context, View view)**| *Sets the target view* |
-|**setTarget(View view, float radiusRatio)**| *Sets the target view and the relative size ratio* |
-|**setTarget(int centerX, int centerY)**| *Uses coordinates to position the indicator* |
-|**setOnEnd(Runnable onEnd)**| *Executes the wrapped code upon ending the indicator animation* |
-|**setOnStart(Runnable onStart)**| *Executes the wrapped code upon starting the indicator animation* |
-|**setIndicatorDuration(int indicatorDuration)**| *Sets the duration of the indicator animation* |
-|**setDrawListener(ViewDrawListener listener)**| *Sets a listener for when the view is first drawn* |
-|**setIndicatorType(int indicatorType)**| *Sets the type of indicator. Ex: IndicatorView.RIPPLE_TYPE_INDICATOR* |
-|**setIndicatorColor(int indicatorColor)**| *Sets the color of the indicator effect* |
-|**setIndicatorRepeats(int indicatorRepeats)**| *Sets how many times the indicator will repeat* |
-|**setIndicatorRepeatMode(int indicatorRepeatMode)**| *Sets the repeat mode. Ex: IndicatorView.REPEAT_RESTART_MODE* |
-|**setIndicatorRippleCount(int indicatorCount)**| *Sets the amount of indicator to display* |
-|**setIndicatorMinOpacity(float indicatorMinOpacity)**| *Sets the min opacity a indicator can have* |
-|**setIndicatorMaxOpacity(float indicatorMaxOpacity)**| *Sets the max opacity a indicator can have* |
-|**setIndicatorStrokeWidth(float indicatorStrokeWidth)**| *Sets the width in pixels of the stroke used for outline style* |
+|**stopIndicatorAnimation**| *Stop the ripple animation* |
+|**setUpWith**| *Sets a parent root to the indicator view* |
+|**setTarget**| *Sets the target view or target position* |
+|**setOnEnd**| *Executes the wrapped code upon ending the indicator animation* |
+|**setOnStart**| *Executes the wrapped code upon starting the indicator animation* |
+|**setIndicatorDuration**| *Sets the duration of the indicator animation* |
+|**setDrawListener**| *Sets a listener for when the view is first drawn* |
+|**setIndicatorType**| *Sets the type of indicator. Ex: IndicatorView.RIPPLE_TYPE_INDICATOR* |
+|**setIndicatorColor**| *Sets the color of the indicator effect* |
+|**setIndicatorRepeats**| *Sets how many times the indicator will repeat* |
+|**setIndicatorRepeatMode**| *Sets the repeat mode. Ex: IndicatorView.REPEAT_RESTART_MODE* |
+|**setIndicatorRippleCount**| *Sets the amount of indicator to display* |
+|**setIndicatorMinOpacity**| *Sets the min opacity a indicator can have* |
+|**setIndicatorMaxOpacity**| *Sets the max opacity a indicator can have* |
+|**setIndicatorStrokeWidth**| *Sets the width in pixels of the stroke used for outline style* |
 
 
 

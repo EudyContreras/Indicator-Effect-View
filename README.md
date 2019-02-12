@@ -5,7 +5,7 @@
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21s)
 [![License: ISC](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/ISC)
 [![](https://jitpack.io/v/EudyContreras/Indicator-Effect-View.svg)](https://jitpack.io/#EudyContreras/Indicator-Effect-View)
-![Version](https://img.shields.io/github/release/EudyContreras/IndicatorEffect.svg?style=flat)
+![Version](https://img.shields.io/github/release/EudyContreras/Indicator-Effect-View.svg?style=flat)
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 
@@ -41,8 +41,8 @@ The indicator effect has a high number of apis that give full control of how the
 ### Some of the in Code Code methods:
 |APIs | Description|
 |---|---|
-|**startIndicatorAnimation**| *No input* |
-|**stopIndicatorAnimation**| *Stop the ripple animation* |
+|**startIndicatorAnimation**| *Starts the indicator animation* |
+|**stopIndicatorAnimation**| *Stop the indicator animation* |
 |**setUpWith**| *Sets a parent root to the indicator view* |
 |**setTarget**| *Sets the target view or target position* |
 |**setOnEnd**| *Executes the wrapped code upon ending the indicator animation* |

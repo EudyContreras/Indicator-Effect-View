@@ -49,7 +49,7 @@ The indicator effect has a high number of apis that give full control of how the
 |**setOnStart**| *Executes the wrapped code upon starting the indicator animation* |
 |**setIndicatorDuration**| *Sets the duration of the indicator animation* |
 |**setDrawListener**| *Sets a listener for when the view is first drawn* |
-|**setIndicatorType**| *Sets the type of indicator. Ex: IndicatorView.RIPPLE_TYPE_INDICATOR* |
+|**setIndicatorType**| *Sets the type of indicator. Ex: IndicatorView.INDICATOR_TYPE_AROUND* |
 |**setIndicatorColor**| *Sets the color of the indicator effect* |
 |**setIndicatorRepeats**| *Sets how many times the indicator will repeat* |
 |**setIndicatorRepeatMode**| *Sets the repeat mode. Ex: IndicatorView.REPEAT_RESTART_MODE* |
@@ -68,30 +68,30 @@ The indicator view can be added directly on the xml layout. The properties below
 
 |Property | Description|
 |---|---|
-| **rv_indicatorType:**  |The type of indicator to be shown, The indicator can be outlined or filled.|
-| **rv_indicatorRepeatMode:**  |The repeat mode of how the animation should be repeated.|
-| **rv_indicatorShapeType:**  |The indicator can be circular or rectangular.|
-| **rv_autoStartAnimation:**  |Determines whether the indicator animation should start automatically.|
-| **rv_indicatorDuration:**  |Determines the amount of time that the indicator animation should last.|
-| **rv_indicatorColor:** |Determines the color the indicator should have.|
-| **rv_indicatorStrokeColor:** |Determines the border color of the indicator if using indicator border.|
-| **rv_indicatorColorStart:** |Determines the start color the indicator should have if interpolation enabled.|
-| **rv_indicatorColorEnd:** |Determines the ending color the indicator should have if interpolation enabled.|
-| **rv_indicatorCount:**  |Determines the amount of indicator to animate.|
-| **rv_indicatorStrokeWidth:**  |Determine the width of the strokes that are shown if outline is chosen|
-| **rv_indicatorClipRadius:**  |Determines how big the clipped area radius will be for the Indicator ripple|
-| **rv_indicatorClipWidth:**  |Determines how big the clipped area width will be for the Indicator ripple
-| **rv_indicatorClipHeight:** |Determines how big the clipped area height will be for the Indicator ripple|
-| **rv_indicatoraxOpacity:**  |Determines the max amount of opacity a indicator can have|
-| **rv_indicatorMinOpacity:** |Determines the lowest amount of opacity a indicator can have|
-| **rv_indicatorMaxRadius:** |Determines the hightest radius a indicator can have|
-| **rv_indicatorMinRadius:** |Determines the lowest radius a indicator can have|
-| **rv_indicatorMinWidth:** |Determines the lowest width a rectangular indicator can have|
-| **rv_indicatorMaxWidth:** |Determines the highest width a rectangular indicator can have|
-| **rv_indicatorMinHeight:** |Determines the lowest height a rectangular indicator can have|
-| **rv_indicatorMaxHeight:** |Determines the highest height a rectangular indicator can have|
-| **rv_indicatorRepeatCount:** |Determines the amount of times a indicator will |
-| **rv_indicatorCornerRadius:** |Determines how rounded the corners of a rectangular indicator is |
+| **iv_indicatorType:**  |The type of indicator to be shown, The indicator can be outlined or filled.|
+| **iv_indicatorRepeatMode:**  |The repeat mode of how the animation should be repeated.|
+| **iv_indicatorShapeType:**  |The indicator can be circular or rectangular.|
+| **iv_autoStartAnimation:**  |Determines whether the indicator animation should start automatically.|
+| **iv_indicatorDuration:**  |Determines the amount of time that the indicator animation should last.|
+| **iv_indicatorColor:** |Determines the color the indicator should have.|
+| **iv_indicatorStrokeColor:** |Determines the border color of the indicator if using indicator border.|
+| **iv_indicatorColorStart:** |Determines the start color the indicator should have if interpolation enabled.|
+| **iv_indicatorColorEnd:** |Determines the ending color the indicator should have if interpolation enabled.|
+| **iv_indicatorCount:**  |Determines the amount of indicator to animate.|
+| **iv_indicatorStrokeWidth:**  |Determine the width of the strokes that are shown if outline is chosen|
+| **iv_indicatorClipRadius:**  |Determines how big the clipped area radius will be for the Indicator ripple|
+| **iv_indicatorClipWidth:**  |Determines how big the clipped area width will be for the Indicator ripple
+| **iv_indicatorClipHeight:** |Determines how big the clipped area height will be for the Indicator ripple|
+| **iv_indicatoraxOpacity:**  |Determines the max amount of opacity a indicator can have|
+| **iv_indicatorMinOpacity:** |Determines the lowest amount of opacity a indicator can have|
+| **iv_indicatorMaxRadius:** |Determines the hightest radius a indicator can have|
+| **iv_indicatorMinRadius:** |Determines the lowest radius a indicator can have|
+| **iv_indicatorMinWidth:** |Determines the lowest width a rectangular indicator can have|
+| **iv_indicatorMaxWidth:** |Determines the highest width a rectangular indicator can have|
+| **iv_indicatorMinHeight:** |Determines the lowest height a rectangular indicator can have|
+| **iv_indicatorMaxHeight:** |Determines the highest height a rectangular indicator can have|
+| **iv_indicatorRepeatCount:** |Determines the amount of times a indicator will |
+| **iv_indicatorCornerRadius:** |Determines how rounded the corners of a rectangular indicator is |
  
  
 ## How to use it?
@@ -144,16 +144,16 @@ Or add the indicator directly through code:
 ``` java
     IndicatorView indicator = new IndicatorView(this);
     
-    ripple.setIndicatorType(IndicatorView.RIPPLE_TYPE_INDICATOR);
-    ripple.setIndicatorClipRadius(DimensionUtility.convertDpToPixel(this,50));
-    ripple.setIndicatorColor(ContextCompat.getColor(this,R.color.accent));
-    ripple.setIndicatorCount(3);
-    ripple.setIndicatorMinOpacity(0.1f);
-    ripple.setIndicatorMaxOpacity(0.8f);
-    ripple.setIndicatorRepeatMode(IndicatorView.REPEAT_RESTART_MODE);
-    ripple.setIndicatorRepeats(IndicatorView.INFINITE_REPEATS);
-    ripple.setIndicatorDuration(2500);
-    ripple.setUpWith(findViewById(R.id.login_activity));
+    indicator.setIndicatorType(IndicatorView.INDICATOR_TYPE_AROUND);
+    indicator.setIndicatorClipRadius(DimensionUtility.convertDpToPixel(this,50));
+    indicator.setIndicatorColor(ContextCompat.getColor(this,R.color.accent));
+    indicator.setIndicatorCount(3);
+    indicator.setIndicatorMinOpacity(0.1f);
+    indicator.setIndicatorMaxOpacity(0.8f);
+    indicator.setIndicatorRepeatMode(IndicatorView.REPEAT_MODE_RESTART);
+    indicator.setIndicatorRepeats(IndicatorView.INFINITE_REPEATS);
+    indicator.setIndicatorDuration(2500);
+    indicator.setUpWith(findViewById(R.id.login_activity));
 ```
 
 

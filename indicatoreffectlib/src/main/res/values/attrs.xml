@@ -1,0 +1,42 @@
+<resources>
+    <declare-styleable name="IndicatorView">
+        <attr name="iv_indicatorType" format="enum">
+            <enum name="TouchIndicatorOutline" value="0"/>
+            <enum name="TouchIndicatorFilled" value="1"/>
+            <enum name="TouchIndicatorAround" value="2"/>
+        </attr>
+        <attr name="iv_indicatorRepeatMode" format="enum">
+            <enum name="Restart" value="1"/>
+            <enum name="Revert" value="2"/>
+        </attr>
+        <attr name="iv_indicatorShapeType" format="enum">
+            <enum name="Circle" value="0"/>
+            <enum name="Rectangle" value="1"/>
+        </attr>
+        <attr name="iv_autoStartAnimation" format="boolean"/>
+        <attr name="iv_useColorInterpolation" format="boolean"/>
+        <attr name="iv_showBorderStroke" format="boolean"/>
+        <attr name="iv_intervalDelay" format="reference|integer"/>
+        <attr name="iv_indicatorDuration" format="reference|integer"/>
+        <attr name="iv_indicatorColor" format="reference|color"/>
+        <attr name="iv_indicatorStrokeColor" format="reference|color"/>
+        <attr name="iv_indicatorColorStart" format="reference|color"/>
+        <attr name="iv_indicatorColorEnd" format="reference|color"/>
+        <attr name="iv_indicatorCount" format="reference|integer"/>
+        <attr name="iv_indicatorStrokeWidth" format="reference|dimension"/>
+        <attr name="iv_indicatorClipRadius" format="reference|dimension"/>
+        <attr name="iv_indicatorClipWidth" format="reference|dimension"/>
+        <attr name="iv_indicatorClipHeight" format="reference|dimension"/>
+        <attr name="iv_indicatorMaxOpacity" format="reference|float"/>
+        <attr name="iv_indicatorMinOpacity" format="reference|float"/>
+        <attr name="iv_indicatorMaxRadius" format="reference|dimension"/>
+        <attr name="iv_indicatorMinRadius" format="reference|dimension"/>
+        <attr name="iv_indicatorMinWidth" format="reference|dimension"/>
+        <attr name="iv_indicatorMaxWidth" format="reference|dimension"/>
+        <attr name="iv_indicatorMinHeight" format="reference|dimension"/>
+        <attr name="iv_indicatorMaxHeight" format="reference|dimension"/>
+        <attr name="iv_indicatorRepeatCount" format="reference|integer"/>
+        <attr name="iv_indicatorCornerRadius" format="reference|dimension"/>
+    </declare-styleable>
+
+</resources>

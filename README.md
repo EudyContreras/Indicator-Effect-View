@@ -13,7 +13,7 @@
 
 ![Indicator Effect Image][IndicatorImage]
 
-[IndicatorImage]: https://github.com/EudyContreras/Indicator-Effect-View/blob/master/Ripple.png
+[IndicatorImage]: https://github.com/EudyContreras/Ripple-Effect-View/blob/EudyContreras-readme/indicator.png
 
 
 ## About:
@@ -202,7 +202,7 @@ There are parts of this library that are yet to be finished and there are also s
 - [ ] Port the code kotlin
 - [ ] Add to different repositories besides jitpack
 - [ ] Allow the user to set a repeat interval/wait time
-- [ ] Add builder pattern for creating indicator
+- [ ] Add builder pattern for creating indicator
 - [ ] Allow the effect to translate with its target upon animations
 
 ## License:

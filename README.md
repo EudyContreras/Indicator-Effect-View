@@ -118,7 +118,7 @@ Add as a dependency in you applications build.gradle.
 ``` groovy
 
    dependencies {
-   	  implementation "com.github.EudyContreras:Indicator-Effect-View:v1.0"
+   	  implementation "com.github.EudyContreras:Indicator-Effect-View:v1.1.0"
    }
 ```
 

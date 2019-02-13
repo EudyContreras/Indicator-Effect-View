@@ -3,6 +3,7 @@ package com.eudycontreras.indicatoreffectlib.utilities;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import androidx.annotation.RestrictTo;
 
 /**
  * <b>Note:</b> Unlicensed private property of the author and creator
@@ -15,6 +16,7 @@ import android.util.DisplayMetrics;
  * @version 1.0
  * @since   2018-03-31
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class DimensionUtility {
 
     /**

@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Region;
 import android.os.Build;
+import androidx.annotation.RestrictTo;
 import com.eudycontreras.indicatoreffectlib.Bounds;
 import com.eudycontreras.indicatoreffectlib.utilities.ColorUtility;
 import com.eudycontreras.indicatoreffectlib.views.IndicatorView;
@@ -21,6 +22,7 @@ import com.eudycontreras.indicatoreffectlib.views.IndicatorView;
  * @version 1.0
  * @since 2018-03-31
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class ParticleIndicator extends Particle {
 
     public static final int RIPPLE_TYPE_OUTLINE = 0;

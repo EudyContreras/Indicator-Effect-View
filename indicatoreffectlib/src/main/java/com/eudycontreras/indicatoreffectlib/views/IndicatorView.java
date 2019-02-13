@@ -38,6 +38,11 @@ import java.util.ArrayList;
  */
 public class IndicatorView extends View {
 
+    @FunctionalInterface
+    public interface IndicatorLayoutBehaviour {
+        void setUpBehaviour(View view, int wrappedWidth, int wrappedHeight);
+    }
+
     public static final int INDICATOR_SHAPE_CIRCLE = 0;
     public static final int INDICATOR_SHAPE_RECTANGLE = 1;
 
@@ -113,34 +118,20 @@ public class IndicatorView extends View {
     private Runnable onEnd;
     private Runnable onStart;
     private Interpolator indicatorInterpolator;
+    private IndicatorLayoutBehaviour behaviour;
     private ViewDrawListener listener;
 
     private AnimatorSet animatorSet;
     private ViewGroup parent;
     private Bounds bounds;
     private Paint paint;
+    private View target;
 
     private ColorUtility.SoulColor color;
     private ColorUtility.SoulColor strokeColor;
     private ColorUtility.SoulColor colorStart;
     private ColorUtility.SoulColor colorEnd;
     private ColorUtility.SoulColor colorInnerOutline;
-
-    private View target;
-
-    private AnimatorListenerAdapter animationListener = new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationStart(Animator animation) {
-            super.onAnimationStart(animation);
-            show(revealDuration);
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            super.onAnimationEnd(animation);
-            dismiss(concealDuration);
-        }
-    };
 
     public IndicatorView(Context context) {
         super(context);
@@ -362,7 +353,6 @@ public class IndicatorView extends View {
     }
 
     public void startIndicatorAnimation(int indicatorDelay, Interpolator interpolator) {
-        animatorSet.removeListener(animationListener);
         animatorSet.cancel();
         animatorSet = null;
 
@@ -372,9 +362,10 @@ public class IndicatorView extends View {
         animatorSet.setInterpolator(interpolator);
         animatorSet.playTogether(animators);
         animatorSet.setStartDelay(indicatorDelay);
-        animatorSet.addListener(animationListener);
         animatorSet.start();
         animationRunning = true;
+
+        show(revealDuration);
     }
 
     public void stopIndicatorAnimation() {
@@ -433,7 +424,11 @@ public class IndicatorView extends View {
     }
 
     public void removeIndicator() {
-        stopIndicatorAnimation();
+        removeIndicator(0);
+    }
+
+    public void removeIndicator(long duration) {
+        stopIndicatorAnimation(duration);
         parent.removeView(this);
     }
 
@@ -533,6 +528,10 @@ public class IndicatorView extends View {
         int height = ((ViewGroup) view.getParent()).getHeight();
 
         setLayoutParams(new ViewGroup.LayoutParams(width, height));
+
+        if (behaviour != null) {
+            behaviour.setUpBehaviour(this, width, height);
+        }
 
         parent.removeView(this);
         parent.addView(this);
@@ -915,6 +914,14 @@ public class IndicatorView extends View {
             return;
 
         this.indicatorCount = indicatorCount;
+    }
+
+    public IndicatorLayoutBehaviour getBehaviour() {
+        return behaviour;
+    }
+
+    public void setBehaviour(IndicatorLayoutBehaviour behaviour) {
+        this.behaviour = behaviour;
     }
 
     public int getUsableWidth() {

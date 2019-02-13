@@ -1,5 +1,7 @@
 package com.eudycontreras.indicatoreffectlib;
 
+import androidx.annotation.RestrictTo;
+
 /**
  * <b>Note:</b> Unlicensed private property of the author and creator
  * unauthorized use of this class outside of the Indicator Effect project
@@ -11,6 +13,7 @@ package com.eudycontreras.indicatoreffectlib;
  * @version 1.0
  * @since   2018-03-31
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class Property<T> {
     private T value;
 

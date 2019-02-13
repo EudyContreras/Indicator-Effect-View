@@ -2,6 +2,7 @@ package com.eudycontreras.indicatoreffectlib.utilities;
 
 import android.graphics.Color;
 import androidx.annotation.ColorInt;
+import androidx.annotation.RestrictTo;
 
 /**
  * <b>Note:</b> Unlicensed private property of the author and creator
@@ -14,6 +15,7 @@ import androidx.annotation.ColorInt;
  * @version 1.0
  * @since   2018-03-31
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class ColorUtility {
 
     public static int colorDecToHex(int r, int g, int b) {

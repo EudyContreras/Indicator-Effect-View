@@ -2,6 +2,7 @@ package com.eudycontreras.indicatoreffectlib.particles;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import androidx.annotation.RestrictTo;
 import com.eudycontreras.indicatoreffectlib.Bounds;
 import com.eudycontreras.indicatoreffectlib.utilities.ColorUtility;
 
@@ -16,6 +17,7 @@ import com.eudycontreras.indicatoreffectlib.utilities.ColorUtility;
  * @version 1.0
  * @since   2018-03-31
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class Particle {
 
     public final static float DEFAULT_LIFE_TIME = 5;

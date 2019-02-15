@@ -64,11 +64,8 @@ public class IndicatorView extends View {
     private int indicatorStrokeColor;
     private int indicatorColorStart;
     private int indicatorColorEnd;
-    private int indicatorDelay;
     private int indicatorRepeats;
     private int indicatorRepeatMode;
-    private int indicatorDuration;
-    private int indicatorIntervalDelay;
     private int indicatorInnerOutlineColor;
 
     private int usableWidth;
@@ -102,8 +99,11 @@ public class IndicatorView extends View {
 
     private float indicatorStrokeWidth;
 
-    private long revealDuration = 300;
-    private long concealDuration = 300;
+    private long revealDuration = 0;
+    private long concealDuration = 0;
+    private long indicatorDelay;
+    private long indicatorDuration;
+    private long indicatorIntervalDelay;
 
     private boolean showInnerOutline = false;
     private boolean useColorInterpolation = false;
@@ -191,6 +191,8 @@ public class IndicatorView extends View {
         animators = new ArrayList<>();
 
         parent = parentView;
+
+        initializeIndicator();
     }
 
     public void setUpAttributes(TypedArray typedArray) {
@@ -522,8 +524,6 @@ public class IndicatorView extends View {
 
         target = view;
 
-        stopIndicatorAnimation();
-
         int width = ((ViewGroup) view.getParent()).getWidth();
         int height = ((ViewGroup) view.getParent()).getHeight();
 
@@ -533,8 +533,10 @@ public class IndicatorView extends View {
             behaviour.setUpBehaviour(this, width, height);
         }
 
-        parent.removeView(this);
-        parent.addView(this);
+        if(this.getParent() != parent) {
+            parent.removeView(this);
+            parent.addView(this);
+        }
 
         int[] locationView = new int[2];
 
@@ -679,11 +681,11 @@ public class IndicatorView extends View {
         this.innerOutLineWidth = innerOutLineWidth;
     }
 
-    public int getIndicatorIntervalDelay() {
+    public long getIndicatorIntervalDelay() {
         return indicatorIntervalDelay;
     }
 
-    public void setIndicatorIntervalDelay(int indicatorIntervalDelay) {
+    public void setIndicatorIntervalDelay(long indicatorIntervalDelay) {
         this.indicatorIntervalDelay = indicatorIntervalDelay;
     }
 
@@ -857,11 +859,11 @@ public class IndicatorView extends View {
         this.indicatorRepeatMode = indicatorRepeatMode;
     }
 
-    public int getIndicatorDuration() {
+    public long getIndicatorDuration() {
         return indicatorDuration;
     }
 
-    public void setIndicatorDuration(int indicatorDuration) {
+    public void setIndicatorDuration(long indicatorDuration) {
         this.indicatorDuration = indicatorDuration;
     }
 

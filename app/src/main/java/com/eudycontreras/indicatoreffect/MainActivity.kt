@@ -32,13 +32,13 @@ class MainActivity : AppCompatActivity() {
         indicator.indicatorStrokeColor = ContextCompat.getColor(this, R.color.colorAccent)
         indicator.indicatorColorStart = ContextCompat.getColor(this, R.color.white)
         indicator.indicatorColorEnd = ContextCompat.getColor(this, R.color.colorAccent)
-        indicator.indicatorCount = 5
+        indicator.indicatorCount = 3
         indicator.indicatorMinOpacity = 0f
         indicator.indicatorMaxOpacity = 1f
         indicator.indicatorRepeatMode = IndicatorView.REPEAT_MODE_RESTART
         indicator.indicatorRepeats = IndicatorView.INFINITE_REPEATS
-        indicator.indicatorDuration = 2000
-        indicator.indicatorStrokeWidth = 10f
+        indicator.indicatorDuration = 7000
+        indicator.indicatorStrokeWidth = 0f
         indicator.isShowBorderStroke = false
         indicator.revealDuration = 0
         indicator.isUseColorInterpolation = false
